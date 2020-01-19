@@ -6,7 +6,6 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
 import com.marklylebanks.bakingapp.R;
 
@@ -19,11 +18,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FragmentRecipeMain fragmentRecipeMain = new FragmentRecipeMain();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.fragment_holder_recipe_cards, fragmentRecipeMain)
-                .commit();
     }
 
     @Override
