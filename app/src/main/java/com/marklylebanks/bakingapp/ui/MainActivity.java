@@ -6,16 +6,11 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentManager;
 
 import com.marklylebanks.bakingapp.R;
-import com.marklylebanks.bakingapp.ui.adapters.AdapterRecipe;
 
 public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        AdapterRecipe adapterRecipe = new AdapterRecipe();
 
-        // set up recyclerView
-        mRecyclerView = findViewById(R.id.rv_main);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(adapterRecipe);
+        FragmentRecipeMain fragmentRecipeMain = new FragmentRecipeMain();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_holder_recipe_cards, fragmentRecipeMain)
+                .commit();
     }
 
     @Override
