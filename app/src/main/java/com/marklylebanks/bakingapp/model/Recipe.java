@@ -8,12 +8,12 @@ public class Recipe extends AppCompatActivity {
 
     public int id;
     public String name;
-    public List<Ingredients> ingredientsList;
+    public List<Ingredient> ingredientsList;
     public List<Steps> stepsList;
     public int servings;
     public String image;
 
-    public Recipe(int id, String name, List<Ingredients> ingredientsList, List<Steps> stepsList, int servings, String image) {
+    public Recipe(int id, String name, List<Ingredient> ingredientsList, List<Steps> stepsList, int servings, String image) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
@@ -38,11 +38,11 @@ public class Recipe extends AppCompatActivity {
         this.name = name;
     }
 
-    public List<Ingredients> getIngredientsList() {
+    public List<Ingredient> getIngredientsList() {
         return ingredientsList;
     }
 
-    public void setIngredientsList(List<Ingredients> ingredientsList) {
+    public void setIngredientsList(List<Ingredient> ingredientsList) {
         this.ingredientsList = ingredientsList;
     }
 

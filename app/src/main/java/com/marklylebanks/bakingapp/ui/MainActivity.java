@@ -1,6 +1,7 @@
 package com.marklylebanks.bakingapp.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -8,8 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.marklylebanks.bakingapp.R;
+import com.marklylebanks.bakingapp.data.FakeData;
+import com.marklylebanks.bakingapp.model.Recipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static List<Recipe> recipeList= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Log.i("recycler", " MainActivity: listSize: " + recipeList.size());
     }
 
     @Override

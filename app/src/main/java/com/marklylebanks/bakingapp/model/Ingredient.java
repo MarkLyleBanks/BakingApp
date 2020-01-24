@@ -2,13 +2,13 @@ package com.marklylebanks.bakingapp.model;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Ingredients extends AppCompatActivity {
+public class Ingredient extends AppCompatActivity {
 
     public float quantity;
     public String measure;
     public String ingredient;
 
-    public Ingredients(float quantity, String measure, String ingredient) {
+    public Ingredient(float quantity, String measure, String ingredient) {
         this.quantity = quantity;
         this.measure = measure;
         this.ingredient = ingredient;

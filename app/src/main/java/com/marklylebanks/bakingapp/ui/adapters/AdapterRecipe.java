@@ -10,22 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marklylebanks.bakingapp.R;
-import com.marklylebanks.bakingapp.data.FakeData;
 import com.marklylebanks.bakingapp.model.Recipe;
+import com.marklylebanks.bakingapp.ui.MainActivity;
 
 import java.util.List;
 
 
 public class AdapterRecipe extends RecyclerView.Adapter<AdapterRecipe.ViewHolder>{
 
-    interface OnItemClicked {
-        
+    public interface AdapterRecipeOnClickHandler {
+        void onRecipeClicked(int position);
     }
 
+    AdapterRecipeOnClickHandler mClickedListener;
     private List<Recipe> recipeList;
 
-    public AdapterRecipe(){
-        recipeList = FakeData.getFakeData();
+    public AdapterRecipe(AdapterRecipeOnClickHandler listener){
+        mClickedListener = listener;
+        recipeList = MainActivity.recipeList;
         Log.i("recycler", " AdapterRecipe: listSize: " + recipeList.size());
     }
 
@@ -50,7 +52,6 @@ public class AdapterRecipe extends RecyclerView.Adapter<AdapterRecipe.ViewHolder
         }else{
 
         }
-
         holder.mRecipeName.setText(currentRecipe.getName());
         holder.mServings.setText(Integer.toString(currentRecipe.getServings()));
     }
@@ -62,11 +63,11 @@ public class AdapterRecipe extends RecyclerView.Adapter<AdapterRecipe.ViewHolder
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public androidx.appcompat.widget.AppCompatImageView mRecipeImage;
-        public TextView mRecipeName;
-        public TextView mServings;
+        private androidx.appcompat.widget.AppCompatImageView mRecipeImage;
+        private TextView mRecipeName;
+        private TextView mServings;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -74,6 +75,14 @@ public class AdapterRecipe extends RecyclerView.Adapter<AdapterRecipe.ViewHolder
             mRecipeImage = itemView.findViewById(R.id.iv_recipe_image);
             mRecipeName = itemView.findViewById(R.id.tv_recipe_name);
             mServings = itemView.findViewById(R.id.tv_recipe_servings);
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            mClickedListener.onRecipeClicked(getAdapterPosition());
+            Log.i("recycler", "onViewClicked: " + getAdapterPosition());
         }
     }
 }

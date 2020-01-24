@@ -2,7 +2,7 @@ package com.marklylebanks.bakingapp.data;
 
 import android.util.Log;
 
-import com.marklylebanks.bakingapp.model.Ingredients;
+import com.marklylebanks.bakingapp.model.Ingredient;
 import com.marklylebanks.bakingapp.model.Recipe;
 import com.marklylebanks.bakingapp.model.Steps;
 
@@ -13,10 +13,10 @@ public class FakeData {
 
      public static List<Recipe> getFakeData() {
         // create first recipe data
-        List<Ingredients> ingredientsList1 = new ArrayList<>();
-        Ingredients ingredient1 = new Ingredients(2, "Cup", "Graham Cracker crumbs");
+        List<Ingredient> ingredientsList1 = new ArrayList<>();
+        Ingredient ingredient1 = new Ingredient(2, "Cup", "Graham Cracker crumbs");
         ingredientsList1.add(ingredient1);
-        Ingredients ingredient2 = new Ingredients(6, "TBLSP", "unsalted butter, melted");
+        Ingredient ingredient2 = new Ingredient(6, "TBLSP", "unsalted butter, melted");
         ingredientsList1.add(ingredient2);
 
         List<Steps> stepsList1 = new ArrayList<>();
@@ -29,10 +29,10 @@ public class FakeData {
 
 
         // create second recipe data
-        List<Ingredients> ingredientsList2 = new ArrayList<>();
-        Ingredients ingredients3 = new Ingredients(350, "G", "bittersweet chocolate");
+        List<Ingredient> ingredientsList2 = new ArrayList<>();
+        Ingredient ingredients3 = new Ingredient(350, "G", "bittersweet chocolate");
         ingredientsList2.add(ingredients3);
-        Ingredients ingredients4= new Ingredients(226, "G", "unsalted butter");
+        Ingredient ingredients4= new Ingredient(226, "G", "unsalted butter");
         ingredientsList2.add(ingredients4);
 
         List<Steps> stepsList2 = new ArrayList<>();
