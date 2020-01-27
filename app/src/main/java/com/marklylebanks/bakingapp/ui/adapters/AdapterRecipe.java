@@ -46,7 +46,7 @@ public class AdapterRecipe extends RecyclerView.Adapter<AdapterRecipe.ViewHolder
         Log.i("recycler", "AdapterRecipe onBindViewHolder: Name: " + currentRecipe.getName());
         Log.i("recycler", "AdapterRecipe onBindViewHolder: Servings: " + currentRecipe.getServings());
         Log.i("recycler", "AdapterRecipe onBindViewHolder: Image: " + currentRecipe.getImage());
-        if (currentRecipe.getImage().equals("") || currentRecipe.getImage().equals(null)){
+        if (currentRecipe.getImage().equals("")) {
             holder.mRecipeImage.setVisibility(View.INVISIBLE);
             Log.i("recycler", "AdapterRecipe onBindViewHolder: Image is empty");
         }else{
@@ -70,7 +70,7 @@ public class AdapterRecipe extends RecyclerView.Adapter<AdapterRecipe.ViewHolder
         private TextView mServings;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        private ViewHolder(@NonNull View itemView) {
             super(itemView);
             mRecipeImage = itemView.findViewById(R.id.iv_recipe_image);
             mRecipeName = itemView.findViewById(R.id.tv_recipe_name);

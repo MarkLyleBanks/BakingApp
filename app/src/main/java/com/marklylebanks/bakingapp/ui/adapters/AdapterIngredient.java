@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marklylebanks.bakingapp.R;
 import com.marklylebanks.bakingapp.model.Ingredient;
+import com.marklylebanks.bakingapp.ui.MainActivity;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class AdapterIngredient extends RecyclerView.Adapter<AdapterIngredient.Vi
 
     private List <Ingredient> mIngredientList;
 
-    public AdapterIngredient(List<Ingredient> ingredients) {
-        mIngredientList = ingredients;
+    public AdapterIngredient(int index) {
+        mIngredientList = MainActivity.recipeList.get(index).getIngredientsList();
     }
 
     @NonNull

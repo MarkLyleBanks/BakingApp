@@ -1,22 +1,24 @@
 package com.marklylebanks.bakingapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.marklylebanks.bakingapp.R;
-import com.marklylebanks.bakingapp.data.FakeData;
 import com.marklylebanks.bakingapp.model.Recipe;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentRecipeMain.OnRecipeClickedPassThrough {
 
+    public static final String SELECTED_RECIPE = "selected recipe";
     public static List<Recipe> recipeList= new ArrayList<>();
 
     @Override
@@ -49,5 +51,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void clickPassThrough(int position) {
+
+        Intent intent = new Intent(this, RecipeSelectedActivity.class);
+        intent.putExtra(SELECTED_RECIPE, position);
+        startActivity(intent);
+        Toast.makeText(this,"From main: \n item " + position + " clicked", Toast.LENGTH_SHORT).show();
     }
 }
