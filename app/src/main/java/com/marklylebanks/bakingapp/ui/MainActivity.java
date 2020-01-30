@@ -1,6 +1,5 @@
 package com.marklylebanks.bakingapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,9 +14,9 @@ import com.marklylebanks.bakingapp.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FragmentRecipeMain.OnRecipeClickedPassThrough {
+public class MainActivity extends AppCompatActivity  {
 
-    public static final String SELECTED_RECIPE = "selected recipe";
+
     public static List<Recipe> recipeList= new ArrayList<>();
 
     @Override
@@ -52,12 +51,5 @@ public class MainActivity extends AppCompatActivity implements FragmentRecipeMai
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void clickPassThrough(int position) {
 
-        Intent intent = new Intent(this, RecipeSelectedActivity.class);
-        intent.putExtra(SELECTED_RECIPE, position);
-        startActivity(intent);
-        
-    }
 }

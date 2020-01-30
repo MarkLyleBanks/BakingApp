@@ -1,8 +1,7 @@
 package com.marklylebanks.bakingapp.ui;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,23 +17,7 @@ import com.marklylebanks.bakingapp.data.FakeData;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterRecipe;
 
 public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.AdapterRecipeOnClickHandler {
-
-    OnRecipeClickedPassThrough mPassThrough;
-
-    public interface OnRecipeClickedPassThrough {
-        void clickPassThrough(int position);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mPassThrough = (OnRecipeClickedPassThrough) context;
-        }catch (ClassCastException e){
-            throw new ClassCastException(context.toString()
-            + " must implement OnRecipeClickedListener");
-        }
-    }
+    public static final String SELECTED_RECIPE = "selected recipe";
 
     public FragmentRecipeMain(){
 
@@ -60,8 +43,8 @@ public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.Adapt
 
     @Override
     public void onRecipeClicked(int position) {
-        mPassThrough.clickPassThrough(position);
-        //Toast.makeText(getContext(),"item " + position + " clicked", Toast.LENGTH_LONG).show();
-        Log.i("recycler", "onRecipeClicked: " + position);
+        Intent intent = new Intent(getContext(), RecipeSelectedActivity.class);
+        intent.putExtra(SELECTED_RECIPE, position);
+        startActivity(intent);
     }
 }
