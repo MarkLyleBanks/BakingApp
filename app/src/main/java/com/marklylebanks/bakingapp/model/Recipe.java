@@ -9,11 +9,11 @@ public class Recipe extends AppCompatActivity {
     public int id;
     public String name;
     public List<Ingredient> ingredientsList;
-    public List<Steps> stepsList;
+    public List<Step> stepsList;
     public int servings;
     public String image;
 
-    public Recipe(int id, String name, List<Ingredient> ingredientsList, List<Steps> stepsList, int servings, String image) {
+    public Recipe(int id, String name, List<Ingredient> ingredientsList, List<Step> stepsList, int servings, String image) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
@@ -46,11 +46,11 @@ public class Recipe extends AppCompatActivity {
         this.ingredientsList = ingredientsList;
     }
 
-    public List<Steps> getStepsList() {
+    public List<Step> getStepsList() {
         return stepsList;
     }
 
-    public void setStepsList(List<Steps> stepsList) {
+    public void setStepsList(List<Step> stepsList) {
         this.stepsList = stepsList;
     }
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -59,6 +58,6 @@ public class MainActivity extends AppCompatActivity implements FragmentRecipeMai
         Intent intent = new Intent(this, RecipeSelectedActivity.class);
         intent.putExtra(SELECTED_RECIPE, position);
         startActivity(intent);
-        Toast.makeText(this,"From main: \n item " + position + " clicked", Toast.LENGTH_SHORT).show();
+        
     }
 }

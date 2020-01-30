@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.marklylebanks.bakingapp.model.Ingredient;
 import com.marklylebanks.bakingapp.model.Recipe;
-import com.marklylebanks.bakingapp.model.Steps;
+import com.marklylebanks.bakingapp.model.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,11 @@ public class FakeData {
         Ingredient ingredient2 = new Ingredient(6, "TBLSP", "unsalted butter, melted");
         ingredientsList1.add(ingredient2);
 
-        List<Steps> stepsList1 = new ArrayList<>();
-        Steps steps1 = new Steps(0, "Recipe Introduction", "Recipe Introduction",
+        List<Step> stepsList1 = new ArrayList<>();
+        Step steps1 = new Step(0, "Recipe Introduction", "Recipe Introduction",
                 "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4","");
         stepsList1.add(steps1);
-        Steps steps2 = new Steps(1, "Starting Prep", "1. Preheat the oven to 350°F. Butter a 9\" deep dish pie pan.",
+        Step steps2 = new Step(1, "Starting Prep", "1. Preheat the oven to 350°F. Butter a 9\" deep dish pie pan.",
                 "","");
         stepsList1.add(steps2);
 
@@ -35,11 +35,11 @@ public class FakeData {
         Ingredient ingredients4= new Ingredient(226, "G", "unsalted butter");
         ingredientsList2.add(ingredients4);
 
-        List<Steps> stepsList2 = new ArrayList<>();
-        Steps steps3 = new Steps(0,"Recipe Introduction", "Recipe Introduction",
+        List<Step> stepsList2 = new ArrayList<>();
+        Step steps3 = new Step(0,"Recipe Introduction", "Recipe Introduction",
                 "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffdc33_-intro-brownies/-intro-brownies.mp4", "");
         stepsList2.add(steps3);
-        Steps steps4 = new Steps(1, "Starting prep", "1. Preheat the oven to 350�F. Butter the bottom and sides of a 9\"x13\" pan.",
+        Step steps4 = new Step(1, "Starting prep", "1. Preheat the oven to 350�F. Butter the bottom and sides of a 9\"x13\" pan.",
                 "", "");
         stepsList2.add(steps4);
 

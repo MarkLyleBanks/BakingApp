@@ -2,7 +2,7 @@ package com.marklylebanks.bakingapp.model;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Steps extends AppCompatActivity {
+public class Step extends AppCompatActivity {
 
     public int id;
     public String shortDescription;
@@ -10,7 +10,7 @@ public class Steps extends AppCompatActivity {
     public  String videoURL;
     public String thumbnailURL;
 
-    public Steps(int id, String shortDescription, String description, String videoURL, String thumbnailURL) {
+    public Step(int id, String shortDescription, String description, String videoURL, String thumbnailURL) {
         this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
