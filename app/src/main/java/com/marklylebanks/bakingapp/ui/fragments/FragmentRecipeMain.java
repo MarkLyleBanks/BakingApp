@@ -1,4 +1,4 @@
-package com.marklylebanks.bakingapp.ui;
+package com.marklylebanks.bakingapp.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.marklylebanks.bakingapp.R;
 import com.marklylebanks.bakingapp.data.FakeData;
+import com.marklylebanks.bakingapp.ui.MainActivity;
+import com.marklylebanks.bakingapp.ui.RecipeSelectedActivity;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterRecipe;
 
 public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.AdapterRecipeOnClickHandler {

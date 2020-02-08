@@ -1,11 +1,11 @@
-package com.marklylebanks.bakingapp.ui;
+package com.marklylebanks.bakingapp.ui.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,20 +14,39 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marklylebanks.bakingapp.R;
+import com.marklylebanks.bakingapp.ui.MainActivity;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterIngredient;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterStep;
 
 public class FragmentRecipeSelected extends Fragment implements AdapterStep.onStepClickedListener {
 
     private int mRecipeIndex;
+    OnStepSelectedListener mListener;
 
-    FragmentRecipeSelected() {
+    public interface OnStepSelectedListener {
+        void onStepSelected(int step);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mListener = (OnStepSelectedListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString()
+                    + "must implement OnStepSelectedListener");
+        }
+    }
+
+    public FragmentRecipeSelected() {
 
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_selected, container, false);
 
         //set the recipe name
@@ -54,6 +73,6 @@ public class FragmentRecipeSelected extends Fragment implements AdapterStep.onSt
 
     @Override
     public void onStepClicked(int position) {
-        Toast.makeText(getContext(), "step " + position + " clicked", Toast.LENGTH_SHORT).show();
+        mListener.onStepSelected(position);
     }
 }

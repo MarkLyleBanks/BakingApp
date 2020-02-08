@@ -10,8 +10,13 @@ import androidx.core.app.NavUtils;
 import androidx.fragment.app.FragmentManager;
 
 import com.marklylebanks.bakingapp.R;
+import com.marklylebanks.bakingapp.data.Constants;
+import com.marklylebanks.bakingapp.ui.fragments.FragmentRecipeSelected;
 
-public class RecipeSelectedActivity extends AppCompatActivity {
+public class RecipeSelectedActivity extends AppCompatActivity
+        implements FragmentRecipeSelected.OnStepSelectedListener {
+
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,7 @@ public class RecipeSelectedActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        int position = intent.getIntExtra(MainActivity.SELECTED_RECIPE, 0);
+        position = intent.getIntExtra(Constants.SELECTED_RECIPE, 0);
 
 
 
@@ -47,4 +52,12 @@ public class RecipeSelectedActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStepSelected(int step) {
+
+        Intent intent = new Intent(this, StepSelectedActivity.class);
+        intent.putExtra(Constants.SELECTED_RECIPE, position)
+                .putExtra(Constants.SELECTED_STEP, step);
+        startActivity(intent);
+    }
 }//Class end
