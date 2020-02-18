@@ -60,8 +60,7 @@ public class FragmentSelectedStep extends Fragment {
         // check if there is a video url if not remove the playerView
         if (videoUrlString == "" || videoUrlString == null){
             mPlayerView.setVisibility(View.GONE);
-
-            //set up the exoplayer and play video
+           //set up the exoplayer and play video
         }else{
             String filetype = videoUrlString.substring(videoUrlString.lastIndexOf(".") + 1);
             Log.i("fileType", "onCreateView: file type is: " + filetype);
