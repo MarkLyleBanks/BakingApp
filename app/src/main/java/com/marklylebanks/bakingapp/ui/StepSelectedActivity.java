@@ -31,7 +31,7 @@ public class StepSelectedActivity extends AppCompatActivity {
         FragmentSelectedStep selectedStep = new FragmentSelectedStep();
         selectedStep.setRecipeId(recipe);
         selectedStep.setStepId(step);
-        selectedStep.setContext(this);
+
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()

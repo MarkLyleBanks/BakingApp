@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marklylebanks.bakingapp.R;
+import com.marklylebanks.bakingapp.data.Constants;
 import com.marklylebanks.bakingapp.ui.MainActivity;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterIngredient;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterStep;
@@ -21,7 +22,7 @@ import com.marklylebanks.bakingapp.ui.adapters.AdapterStep;
 public class FragmentRecipeSelected extends Fragment implements AdapterStep.onStepClickedListener {
 
     private int mRecipeIndex;
-    OnStepSelectedListener mListener;
+    private OnStepSelectedListener mListener;
 
     public interface OnStepSelectedListener {
         void onStepSelected(int step);
@@ -33,7 +34,7 @@ public class FragmentRecipeSelected extends Fragment implements AdapterStep.onSt
 
         try {
             mListener = (OnStepSelectedListener) context;
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + "must implement OnStepSelectedListener");
         }
@@ -49,6 +50,9 @@ public class FragmentRecipeSelected extends Fragment implements AdapterStep.onSt
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_selected, container, false);
 
+        if (savedInstanceState != null) {
+            mRecipeIndex = savedInstanceState.getInt(Constants.SELECTED_RECIPE);
+        }
         //set the recipe name
         TextView RecipeName = rootView.findViewById(R.id.tv_recipe_selected_name);
         RecipeName.setText(MainActivity.recipeList.get(mRecipeIndex).getName());
@@ -74,5 +78,10 @@ public class FragmentRecipeSelected extends Fragment implements AdapterStep.onSt
     @Override
     public void onStepClicked(int position) {
         mListener.onStepSelected(position);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(Constants.SELECTED_RECIPE, mRecipeIndex);
     }
 }

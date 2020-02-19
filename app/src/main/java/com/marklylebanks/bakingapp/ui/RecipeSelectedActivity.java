@@ -12,11 +12,13 @@ import androidx.fragment.app.FragmentManager;
 import com.marklylebanks.bakingapp.R;
 import com.marklylebanks.bakingapp.data.Constants;
 import com.marklylebanks.bakingapp.ui.fragments.FragmentRecipeSelected;
+import com.marklylebanks.bakingapp.ui.fragments.FragmentSelectedStep;
 
 public class RecipeSelectedActivity extends AppCompatActivity
         implements FragmentRecipeSelected.OnStepSelectedListener {
 
-    int position;
+    int mPosition;
+    boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +32,28 @@ public class RecipeSelectedActivity extends AppCompatActivity
 
 
         Intent intent = getIntent();
-        position = intent.getIntExtra(Constants.SELECTED_RECIPE, 0);
-
+        mPosition = intent.getIntExtra(Constants.SELECTED_RECIPE, 0);
 
 
         FragmentRecipeSelected recipeSelected = new FragmentRecipeSelected();
-        recipeSelected.setIngredientIndex(position);
+        recipeSelected.setIngredientIndex(mPosition);
 
+        if (savedInstanceState == null) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.recipe_selected_container, recipeSelected)
                 .commit();
+
+        if (findViewById(R.id.recipe_two_pane) != null) {
+            mTwoPane = true;
+                FragmentSelectedStep selectedStep = new FragmentSelectedStep();
+                selectedStep.setStepId(0);
+                selectedStep.setRecipeId(mPosition);
+                fragmentManager.beginTransaction()
+                        .add(R.id.step_selected_container, selectedStep)
+                        .commit();
+            }
+        }
     }
 
     @Override
@@ -54,10 +67,19 @@ public class RecipeSelectedActivity extends AppCompatActivity
 
     @Override
     public void onStepSelected(int step) {
-
-        Intent intent = new Intent(this, StepSelectedActivity.class);
-        intent.putExtra(Constants.SELECTED_RECIPE, position)
-                .putExtra(Constants.SELECTED_STEP, step);
-        startActivity(intent);
+        if (mTwoPane) {
+            FragmentSelectedStep selectedStep = new FragmentSelectedStep();
+            selectedStep.setStepId(step);
+            selectedStep.setRecipeId(mPosition);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.step_selected_container, selectedStep)
+                    .commit();
+        } else {
+            Intent intent = new Intent(this, StepSelectedActivity.class);
+            intent.putExtra(Constants.SELECTED_RECIPE, mPosition)
+                    .putExtra(Constants.SELECTED_STEP, step);
+            startActivity(intent);
+        }
     }
 }//Class end
