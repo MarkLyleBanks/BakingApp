@@ -38,13 +38,14 @@ public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.Adapt
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapterRecipe);
 
-
+        //IngredientsWidgetProvider.onUpdate;
 
         return rootView;
     }
 
     @Override
     public void onRecipeClicked(int position) {
+        MainActivity.recipeIndex = position;
         Intent intent = new Intent(getContext(), RecipeSelectedActivity.class);
         intent.putExtra(SELECTED_RECIPE, position);
         startActivity(intent);
