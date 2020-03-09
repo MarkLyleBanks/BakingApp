@@ -20,7 +20,7 @@ public class FakeData {
         ingredientsList1.add(ingredient2);
 
         List<Step> stepsList1 = new ArrayList<>();
-        Step steps1 = new Step(0, "Recipe Introduction", "Recipe Introduction",
+        Step steps1 = new Step(0, "Recipe Introduction", "Nutella Recipe Introduction",
                 "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4","");
         stepsList1.add(steps1);
         Step steps2 = new Step(1, "Starting Prep", "1. Preheat the oven to 350°F. Butter a 9\" deep dish pie pan.",
@@ -36,7 +36,7 @@ public class FakeData {
         ingredientsList2.add(ingredients4);
 
         List<Step> stepsList2 = new ArrayList<>();
-        Step steps3 = new Step(0,"Recipe Introduction", "Recipe Introduction",
+        Step steps3 = new Step(0,"Recipe Introduction", "Brownie Recipe Introduction",
                 "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffdc33_-intro-brownies/-intro-brownies.mp4", "");
         stepsList2.add(steps3);
         Step steps4 = new Step(1, "Starting prep", "1. Preheat the oven to 350�F. Butter the bottom and sides of a 9\"x13\" pan.",

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.fragment.app.FragmentManager;
 
+import com.marklylebanks.bakingapp.IngredientsWidgetProvider;
 import com.marklylebanks.bakingapp.R;
 import com.marklylebanks.bakingapp.data.Constants;
 import com.marklylebanks.bakingapp.ui.fragments.FragmentRecipeSelected;
@@ -32,7 +33,7 @@ public class RecipeSelectedActivity extends AppCompatActivity
 
 
         Intent intent = getIntent();
-        mPosition = intent.getIntExtra(Constants.SELECTED_RECIPE, 0);
+        mPosition = MainActivity.recipeIndex;
 
 
         FragmentRecipeSelected recipeSelected = new FragmentRecipeSelected();
@@ -60,6 +61,8 @@ public class RecipeSelectedActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+            MainActivity.recipeIndex = -1;
+            IngredientsWidgetProvider.updateIngredientsWidget(this);
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);

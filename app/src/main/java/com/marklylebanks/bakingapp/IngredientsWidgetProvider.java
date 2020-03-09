@@ -3,11 +3,12 @@ package com.marklylebanks.bakingapp;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.marklylebanks.bakingapp.data.Constants;
 import com.marklylebanks.bakingapp.ui.MainActivity;
 import com.marklylebanks.bakingapp.ui.RecipeSelectedActivity;
 
@@ -22,19 +23,27 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        String widgetText = context.getResources().getString(R.string.appwidget_text);//"test"; //context.getString(R.string.appwidget_text);
+        String widgetTitle = context.getResources().getString(R.string.app_name);
+        String widgetRecipe;
+
+        if (MainActivity.recipeIndex >= 0) {
+            widgetRecipe = MainActivity.recipeList.get(MainActivity.recipeIndex).getName();
+            Log.i("widget", "updateAppWidget: recipeIndex " + MainActivity.recipeIndex);
+
+            intent = new Intent(context, RecipeSelectedActivity.class);
+
+        } else {
+            widgetRecipe = "";
+            intent = new Intent(context, MainActivity.class);
+        }
+
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget_provider);
 
+        views.setTextViewText(R.id.appwidget_title, widgetTitle);
+        views.setTextViewText(R.id.appwidget_recipe, widgetRecipe);
 
-        views.setTextViewText(R.id.appwidget_title, widgetText);
-        if(MainActivity.recipeList.size() > 0) {
-            intent = new Intent(context, RecipeSelectedActivity.class);
-            intent.putExtra(Constants.SELECTED_RECIPE, MainActivity.recipeIndex);
-        }else{
-            intent = new Intent(context, MainActivity.class);
-        }
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_layout, pendingIntent);
 
         // Instruct the widget manager to update the widget
@@ -57,6 +66,15 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    public static void updateIngredientsWidget(Context context) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] appWidgetsIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, IngredientsWidgetProvider.class));
+        for (int appWidgetsId : appWidgetsIds) {
+            updateAppWidget(context, appWidgetManager, appWidgetsId);
+        }
+
     }
 }
 

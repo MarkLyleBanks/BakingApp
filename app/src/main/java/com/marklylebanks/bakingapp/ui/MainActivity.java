@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
     public static List<Recipe> recipeList= new ArrayList<>();
-    public static int recipeIndex = 0;
+    public static int recipeIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

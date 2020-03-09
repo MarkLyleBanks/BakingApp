@@ -2,6 +2,7 @@ package com.marklylebanks.bakingapp.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.marklylebanks.bakingapp.IngredientsWidgetProvider;
 import com.marklylebanks.bakingapp.R;
 import com.marklylebanks.bakingapp.data.FakeData;
 import com.marklylebanks.bakingapp.ui.MainActivity;
@@ -19,7 +21,6 @@ import com.marklylebanks.bakingapp.ui.RecipeSelectedActivity;
 import com.marklylebanks.bakingapp.ui.adapters.AdapterRecipe;
 
 public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.AdapterRecipeOnClickHandler {
-    public static final String SELECTED_RECIPE = "selected recipe";
 
     public FragmentRecipeMain(){
 
@@ -46,8 +47,11 @@ public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.Adapt
     @Override
     public void onRecipeClicked(int position) {
         MainActivity.recipeIndex = position;
+        Log.i("widget", "onRecipeClicked: position is: " + position);
+        Log.i("widget", "onRecipeClicked: recipe is: " + MainActivity.recipeIndex);
+        IngredientsWidgetProvider.updateIngredientsWidget(getContext());
+        IngredientsWidgetProvider.updateIngredientsWidget(getContext());
         Intent intent = new Intent(getContext(), RecipeSelectedActivity.class);
-        intent.putExtra(SELECTED_RECIPE, position);
         startActivity(intent);
     }
 }
