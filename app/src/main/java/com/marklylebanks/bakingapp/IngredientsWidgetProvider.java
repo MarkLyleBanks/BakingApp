@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.marklylebanks.bakingapp.ui.MainActivity;
@@ -28,17 +27,14 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget_provider);
-
-        Intent listIntent = new Intent (context, ListWidgetService.class);
+        Intent listIntent = new Intent(context, ListWidgetService.class);
         views.setRemoteAdapter(R.id.appwidget_list, listIntent);
         views.setEmptyView(R.id.appwidget_list, R.id.appwidget_empty_view);
 
+        //create the intent to start the mainActivity or the RecipeSelected Activity
         if (MainActivity.recipeIndex >= 0) {
             widgetRecipe = MainActivity.recipeList.get(MainActivity.recipeIndex).getName();
-            Log.i("widget", "updateAppWidget: recipeIndex " + MainActivity.recipeIndex);
-
             intent = new Intent(context, RecipeSelectedActivity.class);
-
         } else {
             widgetRecipe = "";
             intent = new Intent(context, MainActivity.class);
@@ -49,8 +45,7 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_layout, pendingIntent);
-
-
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.appwidget_list);
 
 
         // Instruct the widget manager to update the widget

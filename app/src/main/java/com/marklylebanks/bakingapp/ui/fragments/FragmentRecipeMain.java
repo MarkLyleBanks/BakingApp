@@ -50,7 +50,7 @@ public class FragmentRecipeMain extends Fragment  implements AdapterRecipe.Adapt
         Log.i("widget", "onRecipeClicked: position is: " + position);
         Log.i("widget", "onRecipeClicked: recipe is: " + MainActivity.recipeIndex);
         IngredientsWidgetProvider.updateIngredientsWidget(getContext());
-        IngredientsWidgetProvider.updateIngredientsWidget(getContext());
+
         Intent intent = new Intent(getContext(), RecipeSelectedActivity.class);
         startActivity(intent);
     }

@@ -1,7 +1,5 @@
 package com.marklylebanks.bakingapp.ui;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -57,23 +55,19 @@ public class RecipeSelectedActivity extends AppCompatActivity
                         .commit();
             }
 
-            updateWidgets();
+            IngredientsWidgetProvider.updateIngredientsWidget(this);
         }
     }
 
-    private void updateWidgets() {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, IngredientsWidgetProvider.class));
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             MainActivity.recipeIndex = -1;
-            updateWidgets();
             IngredientsWidgetProvider.updateIngredientsWidget(this);
+
             NavUtils.navigateUpFromSameTask(this);
         }
         return super.onOptionsItemSelected(item);
