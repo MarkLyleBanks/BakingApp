@@ -26,6 +26,13 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
         String widgetTitle = context.getResources().getString(R.string.app_name);
         String widgetRecipe;
 
+        // Construct the RemoteViews object
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget_provider);
+
+        Intent listIntent = new Intent (context, ListWidgetService.class);
+        views.setRemoteAdapter(R.id.appwidget_list, listIntent);
+        views.setEmptyView(R.id.appwidget_list, R.id.appwidget_empty_view);
+
         if (MainActivity.recipeIndex >= 0) {
             widgetRecipe = MainActivity.recipeList.get(MainActivity.recipeIndex).getName();
             Log.i("widget", "updateAppWidget: recipeIndex " + MainActivity.recipeIndex);
@@ -37,17 +44,18 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
             intent = new Intent(context, MainActivity.class);
         }
 
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredients_widget_provider);
-
         views.setTextViewText(R.id.appwidget_title, widgetTitle);
         views.setTextViewText(R.id.appwidget_recipe, widgetRecipe);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_layout, pendingIntent);
 
+
+
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+
     }
 
     @Override
@@ -74,7 +82,6 @@ public class IngredientsWidgetProvider extends AppWidgetProvider {
         for (int appWidgetsId : appWidgetsIds) {
             updateAppWidget(context, appWidgetManager, appWidgetsId);
         }
-
     }
 }
 

@@ -67,7 +67,6 @@ public class FragmentRecipeSelected extends Fragment implements AdapterStep.onSt
         stepRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         stepRecycler.setAdapter(steps);
 
-
         return rootView;
     }
 

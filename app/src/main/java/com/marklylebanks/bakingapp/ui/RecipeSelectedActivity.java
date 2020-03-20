@@ -1,5 +1,7 @@
 package com.marklylebanks.bakingapp.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,7 +34,7 @@ public class RecipeSelectedActivity extends AppCompatActivity
         }
 
 
-        Intent intent = getIntent();
+        // Intent intent = getIntent();
         mPosition = MainActivity.recipeIndex;
 
 
@@ -40,13 +42,13 @@ public class RecipeSelectedActivity extends AppCompatActivity
         recipeSelected.setIngredientIndex(mPosition);
 
         if (savedInstanceState == null) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.recipe_selected_container, recipeSelected)
-                .commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .add(R.id.recipe_selected_container, recipeSelected)
+                    .commit();
 
-        if (findViewById(R.id.recipe_two_pane) != null) {
-            mTwoPane = true;
+            if (findViewById(R.id.recipe_two_pane) != null) {
+                mTwoPane = true;
                 FragmentSelectedStep selectedStep = new FragmentSelectedStep();
                 selectedStep.setStepId(0);
                 selectedStep.setRecipeId(mPosition);
@@ -54,7 +56,15 @@ public class RecipeSelectedActivity extends AppCompatActivity
                         .add(R.id.step_selected_container, selectedStep)
                         .commit();
             }
+
+            updateWidgets();
         }
+    }
+
+    private void updateWidgets() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, IngredientsWidgetProvider.class));
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.appwidget_list);
     }
 
     @Override
@@ -62,6 +72,7 @@ public class RecipeSelectedActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == android.R.id.home) {
             MainActivity.recipeIndex = -1;
+            updateWidgets();
             IngredientsWidgetProvider.updateIngredientsWidget(this);
             NavUtils.navigateUpFromSameTask(this);
         }
